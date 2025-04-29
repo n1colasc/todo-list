@@ -13,7 +13,8 @@
     "build:web": "ng build",
     "build:android": "yarn clean:android && yarn build:web && npx cap sync android && cd android && ./gradlew assembleDebug",
     "clean:android": "cd android && ./gradlew clean",
-    "debug": "npm run build && npx cap open android"
+    "debug": "npm run build && npx cap open android",
+    "sonar": "sonar-scanner"
   },
   "private": true,
   "dependencies": {

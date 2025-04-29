@@ -22,6 +22,12 @@ export class TasksPage implements OnInit {
     this.tasks = this.dataService.tasks;
   }
 
+  trackId(index: number, task: Task): number {
+    return task.id;
+  }
+  trackCategoryId(index: number, category: Category): number {
+    return category.id;
+  }
   syncTasks(){
     this.tasks = this.dataService.tasks;
   }

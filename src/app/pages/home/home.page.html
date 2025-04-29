@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="ion-padding-horizontal">
+  <ion-toolbar class="ion-padding-horizontal ion-margin-top">
     <ion-img
       alt="Logo"
       src="assets/img/logo.png"
@@ -25,7 +25,7 @@
   <ion-content>
     <ion-list class="ion-margin-top">
       <h2 class="title">Tareas pendientes</h2>
-      <ion-card class="card-with-icon" *ngFor="let task of filteredTasks()">
+      <ion-card class="card-with-icon" *ngFor="let task of filteredTasks(); trackBy: trackId">
         <ion-button fill="clear" size="small" class="top-right-icon" (click)="openEditModal(task)" >
           <ion-icon
           slot="icon-only"

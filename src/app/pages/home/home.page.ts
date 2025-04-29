@@ -27,7 +27,9 @@ export class HomePage {
     private router: Router,
     private modalCtrl: ModalController,
   ) {}
-
+  trackId(index: number, task: Task): number {
+    return task.id;
+  }
   async openEditModal(task: Task) {
     const modal = await this.modalCtrl.create({
       component: EditTaskModalComponent,

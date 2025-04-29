@@ -11,7 +11,7 @@
     <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterTasks()" placeholder="Buscar por categoría"></ion-searchbar>
     <ion-content>
       <ion-list class="ion-margin-top">
-        <ion-card class="card-with-icon" *ngFor="let task of filteredTasks()">
+        <ion-card class="card-with-icon" *ngFor="let task of filteredTasks(); trackBy: trackId">
           <ion-button fill="clear" size="small" class="top-right-icon" (click)="openEditModal(task)" >
             <ion-icon
             slot="icon-only"
@@ -34,7 +34,7 @@
   <ion-segment-content id="te">
     <ion-content>
       <ion-list *ngIf="(filteredCategories()?.length || 0)  > 0" class="ion-margin-top">
-        <ion-card class="card-with-icon" *ngFor="let category of filteredCategories()">
+        <ion-card class="card-with-icon" *ngFor="let category of filteredCategories(); trackBy: trackCategoryId">
           <ion-button fill="clear" size="small" class="top-right-icon" (click)="openEditCategoryModal(category)" >
             <ion-icon
             slot="icon-only"
