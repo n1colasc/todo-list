@@ -144,7 +144,7 @@ Métodos principales:
 ### RemoteConfigService
 Servicio para manejar configuraciones remotas de la aplicación.
 
-
+---
 
 ## 📸 Demostraciones
 
@@ -157,6 +157,11 @@ Servicio para manejar configuraciones remotas de la aplicación.
 ![Funcionamiento de firebase](./docs/firebase_activo.png)
 #### Flag inactivo
 ![Funcionamiento de firebase](./docs/firebase_inactivo.png)
+
+### Nota:
+- En la ruta ./docs/apk se encuentra el archivo generado para android con nombre **todo-list.apk**.
+
+---
 
 ### 
 
