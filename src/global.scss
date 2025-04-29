@@ -35,3 +35,41 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.no-spaces {
+    margin: 0;
+    padding: 0;
+  }
+
+.small-text {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+.medium-text{
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-input {
+  --background: #f0f0f0; /* Color de fondo */
+  color: black;
+  --padding-start: 10px; /* Opcional: para que el texto no pegue al borde */
+  --padding-end: 10px;
+  border-radius: 12px; /* Opcional: bordes redondeados */
+}

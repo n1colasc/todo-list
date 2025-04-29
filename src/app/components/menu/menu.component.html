@@ -1,0 +1,16 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button (click)="redirect('/home')" tab="home">
+      <ion-icon name="home-outline"></ion-icon>
+      Inicio
+    </ion-tab-button>
+    <ion-tab-button (click)="redirect('/add-task')" tab="add-task">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      Agregar
+    </ion-tab-button>
+    <ion-tab-button (click)="redirect('/tasks')" tab="tasks">
+      <ion-icon name="checkmark-outline"></ion-icon>
+      Tareas
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

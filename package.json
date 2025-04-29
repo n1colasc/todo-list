@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "build": "npm run build:web && npx cap sync android && npm run build:android",
     "build:web": "ng build",
-    "build:android": "cd android && ./gradlew assembleDebug",
+    "build:android": "yarn clean:android && yarn build:web && npx cap sync android && cd android && ./gradlew assembleDebug",
+    "clean:android": "cd android && ./gradlew clean",
     "debug": "npm run build && npx cap open android"
   },
   "private": true,
