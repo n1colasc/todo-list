@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar class="ion-padding-horizontal">
+    <ion-img
+      alt="Logo"
+      src="assets/img/logo.png"
+      class="home-header-logo"
+    ></ion-img>
+    <ion-buttons slot="end">
+      <ion-icon (click)="redirect('/settings')" name="settings-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="isEmpty else Tasks" class="home-content-empty-container">
+  <h2 class="title">¡Sin tareas!</h2>
+  <p class="caption">Crea tareas • Agrega recordatorios • Haz seguimiento</p>
+  <ion-img
+    alt="Empty"
+    src="assets/img/empty.svg"
+    class="home-content-empty-img"
+  ></ion-img>
+</div>
+
+<ng-template #Tasks>
+  <ion-content>
+    <ion-list class="ion-margin-top">
+      <h2 class="title">Tareas pendientes</h2>
+      <ion-card class="card-with-icon" *ngFor="let task of filteredTasks()">
+        <ion-button fill="clear" size="small" class="top-right-icon" (click)="openEditModal(task)" >
+          <ion-icon
+          slot="icon-only"
+          name="pencil-outline"
+        ></ion-icon>
+        </ion-button>  
+        <ion-card-header>
+            <ion-card-title><ion-checkbox (click)="toggleTask(task)" labelPlacement="end">{{ task.title }}</ion-checkbox></ion-card-title>
+            <ion-card-subtitle class="margin-card">{{ getCategoryName(task.categoryId) }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="column margin-card">
+            <p class="no-spaces">{{ task.description }}</p>
+            <p class="no-spaces">{{ task.date | date: 'fullDate' }}</p>
+          </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ion-content>
+</ng-template>
