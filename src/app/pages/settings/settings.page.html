@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <h3>Funcionalidades del sistema</h3>
+      <ion-toggle [(ngModel)]="valFeature" [checked]="valFeature" disabled="valFeature">Agregar tareas</ion-toggle><br /><br />
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
