@@ -31,7 +31,7 @@ export class HomePage {
   async openEditModal(task: Task) {
     const modal = await this.modalCtrl.create({
       component: EditTaskModalComponent,
-      componentProps: { task: { ...task } } // copia para edición segura
+      componentProps: { task: { ...task } }
     });
   
     await modal.present();

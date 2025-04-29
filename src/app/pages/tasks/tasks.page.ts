@@ -28,7 +28,7 @@ export class TasksPage implements OnInit {
   async openEditCategoryModal(category: Category) {
     const modal = await this.modalCtrl.create({
       component: EditCategoryModalComponent,
-      componentProps: { category: { ...category } } // copia para edición segura
+      componentProps: { category: { ...category } }
     });
   
     await modal.present();
@@ -41,7 +41,7 @@ export class TasksPage implements OnInit {
   async openEditModal(task: Task) {
     const modal = await this.modalCtrl.create({
       component: EditTaskModalComponent,
-      componentProps: { task: { ...task } }, // copia para edición segura
+      componentProps: { task: { ...task } },
     });
 
     await modal.present();

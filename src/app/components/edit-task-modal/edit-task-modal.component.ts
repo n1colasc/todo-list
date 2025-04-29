@@ -12,7 +12,7 @@ import { DataService } from 'src/app/services/data.service';
   imports: [CommonModule, FormsModule, IonicModule],
 })
 export class EditTaskModalComponent {
-  @Input() task: any = {}; // La tarea a editar
+  @Input() task: any = {};
   selectedCategoryId?: number;
   selectedDate: string | null = null;
   constructor(private modalCtrl: ModalController, public dataService: DataService) {}

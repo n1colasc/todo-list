@@ -1,4 +1,3 @@
-// src/app/services/data.service.ts
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
 import { Category } from '../models/category.model';

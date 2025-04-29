@@ -9,6 +9,7 @@ export class RemoteConfigService {
 
   async isFeatureEnabled(featureKey: string): Promise<boolean> {
     await fetchAndActivate(this.remoteConfig);
-    return getValue(this.remoteConfig, featureKey).asBoolean();
+    const val = getValue(this.remoteConfig, featureKey).asBoolean();
+    return val;
   }
 }

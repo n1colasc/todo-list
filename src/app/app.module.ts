@@ -24,7 +24,15 @@ registerLocaleData(localeEsCO);
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'es-CO' },
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideRemoteConfig(() => getRemoteConfig()),
+    provideRemoteConfig(() => {
+      const remoteConfig = getRemoteConfig();
+      remoteConfig.settings = {
+        minimumFetchIntervalMillis: 10000,
+        fetchTimeoutMillis: 60000,
+
+      };
+      return remoteConfig;
+    }),
   ],
   bootstrap: [AppComponent],
 })
