@@ -1,0 +1,18 @@
+.card-with-icon {
+    position: relative;
+  
+    .top-right-icon {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 10;
+    }
+  }
+
+  .margin-card {
+    margin-left: 35px;
+  }
+
+  .margin-top{
+    margin-top: 60px;
+  }

@@ -1,0 +1,55 @@
+<ion-segment class="margin-top">
+  <ion-segment-button value="te" content-id="ta">
+    <ion-label>Tareas</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="ca" content-id="te">
+    <ion-label>Categorías</ion-label>
+  </ion-segment-button>
+</ion-segment>
+<ion-segment-view>
+  <ion-segment-content id="ta">
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterTasks()" placeholder="Buscar por categoría"></ion-searchbar>
+    <ion-content>
+      <ion-list class="ion-margin-top">
+        <ion-card class="card-with-icon" *ngFor="let task of filteredTasks()">
+          <ion-button fill="clear" size="small" class="top-right-icon" (click)="openEditModal(task)" >
+            <ion-icon
+            slot="icon-only"
+            name="pencil-outline"
+          ></ion-icon>
+          </ion-button>  
+          <ion-card-header>
+              <ion-card-title><ion-checkbox [(ngModel)]="task.completed" (click)="toggleTask(task)" labelPlacement="end">{{ task.title }}</ion-checkbox></ion-card-title>
+              <ion-card-subtitle class="margin-card">{{ getCategoryName(task.categoryId) }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="column margin-card">
+              <p class="no-spaces">{{ task.description }}</p>
+              <p class="no-spaces">{{ task.date | date: 'fullDate' }}</p>
+            </ion-card-content>
+            <ion-button class="margin-card" color="danger" (click)="deleteTask(task); $event.stopPropagation();" fill="clear">Eliminar</ion-button>
+        </ion-card>
+      </ion-list>
+    </ion-content>
+  </ion-segment-content>
+  <ion-segment-content id="te">
+    <ion-content>
+      <ion-list *ngIf="(filteredCategories()?.length || 0)  > 0" class="ion-margin-top">
+        <ion-card class="card-with-icon" *ngFor="let category of filteredCategories()">
+          <ion-button fill="clear" size="small" class="top-right-icon" (click)="openEditCategoryModal(category)" >
+            <ion-icon
+            slot="icon-only"
+            name="pencil-outline"
+          ></ion-icon>
+          </ion-button>  
+          <ion-card-header>
+              <ion-card-title>{{ category.name }}</ion-card-title>
+              <ion-card-subtitle class="margin-card"></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="column margin-card">
+            </ion-card-content>
+            <ion-button class="margin-card" color="danger" (click)="deleteCategory(category); $event.stopPropagation();" fill="clear">Eliminar</ion-button>
+        </ion-card>
+      </ion-list>
+    </ion-content>
+  </ion-segment-content>
+</ion-segment-view>
