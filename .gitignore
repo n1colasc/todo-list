@@ -73,3 +73,7 @@ Thumbs.db
 #Lock files
 *.lock
 package-lock.json
+
+#Sonar files
+sonar-project.properties
+.scannerwork
