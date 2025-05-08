@@ -134,6 +134,8 @@ interface Category {
 
 ### Estado del análisis del SonarQube
 ![Estado del análisis de SonarQube](./docs/sonar.png)
+### Estado de las pruebas unitarias
+![Estado del análisis de SonarQube](./docs/unit_tests.png)
 ### Diseño y funcionamiento de la aplicación
 ![Diseño de la aplicación](./docs/visual.png)
 ### Funcionamiento de firebase remote config
