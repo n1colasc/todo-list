@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { RemoteConfigService } from '../../services/remote-config.service';
-import { Task } from '../../models/task.model';
+import { RemoteConfigService } from '../../../core/services/remote-config.service';
+import { TaskEntity } from '../../../domain/entities/task.entity';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { EditTaskModalComponent } from '../../components/edit-task-modal/edit-task-modal.component';
+import { UpdateTaskUseCase } from 'src/app/domain/use-cases/tasks/update-task.use-case';
+import { ToggleTaskUseCase } from 'src/app/domain/use-cases/tasks/toggle-task.use-case';
+import { GetTasksUseCase } from 'src/app/domain/use-cases/tasks/get-tasks.use-case';
+import { GetCategoriesUseCase } from 'src/app/domain/use-cases/categories/get-categories.use-case';
 
 @Component({
   selector: 'app-home',
@@ -22,25 +25,28 @@ export class HomePage {
   }
 
   constructor(
-    public dataService: DataService,
+    public updateTaskUseCase: UpdateTaskUseCase,
+    public toggleTaskUseCase: ToggleTaskUseCase,
+    public getTasksUseCase: GetTasksUseCase,
+    public getCategoriesUseCase: GetCategoriesUseCase,
     public remoteConfigService: RemoteConfigService,
     private router: Router,
-    private modalCtrl: ModalController,
+    private modalCtrl: ModalController
   ) {}
-  trackId(index: number, task: Task): number {
+  trackId(index: number, task: TaskEntity): number {
     return task.id;
   }
-  async openEditModal(task: Task) {
+  async openEditModal(task: TaskEntity) {
     const modal = await this.modalCtrl.create({
       component: EditTaskModalComponent,
-      componentProps: { task: { ...task } }
+      componentProps: { task: { ...task } },
     });
-  
+
     await modal.present();
-  
+
     const { data } = await modal.onDidDismiss();
     if (data) {
-      this.dataService.updateTask(data);
+      this.updateTaskUseCase.execute(data);
     }
   }
   async ngOnInit() {
@@ -57,18 +63,18 @@ export class HomePage {
     return this.filteredTasks()?.length < 1 ? true : false;
   }
 
-  toggleTask(task: Task) {
-    this.dataService.toggleTask(task);
+  toggleTask(task: TaskEntity) {
+    this.toggleTaskUseCase.execute(task);
   }
 
   filteredTasks() {
-    return this.dataService.tasks.filter((x) => !x.completed);
+    return this.getTasksUseCase.execute().filter((x) => !x.completed);
   }
 
   getCategoryName(categoryId?: number) {
-    const category = this.dataService.categories.find(
-      (c) => c.id === categoryId
-    );
+    const category = this.getCategoriesUseCase
+      .execute()
+      .find((c) => c.id === categoryId);
     return category ? category.name : '';
   }
 }

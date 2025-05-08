@@ -9,19 +9,19 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./presentation/pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'tasks',
-    loadChildren: () => import('./pages/tasks/tasks.module').then( m => m.TasksPageModule)
+    loadChildren: () => import('./presentation/pages/tasks/tasks.module').then( m => m.TasksPageModule)
   },
   {
     path: 'add-task',
-    loadComponent: () => import('./pages/add-task/add-task.page').then( m => m.AddTaskPage)
+    loadComponent: () => import('./presentation/pages/add-task/add-task.page').then( m => m.AddTaskPage)
   },
   {
     path: 'settings',
-    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+    loadChildren: () => import('./presentation/pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
 ];
 

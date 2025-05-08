@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RemoteConfigService } from 'src/app/services/remote-config.service';
+import { RemoteConfigService } from 'src/app/core/services/remote-config.service';
 
 @Component({
   selector: 'app-settings',

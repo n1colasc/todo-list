@@ -12,7 +12,21 @@ Esta es una prueba técnica desarrollada con **Ionic + Angular**, cuyo objetivo 
 
 Se utilizaron buenas prácticas de desarrollo, optimización de rendimiento y configuración para múltiples plataformas móviles.
 
+Además, la aplicación fue diseñada siguiendo los principios de Clean Architecture, separando responsabilidades en distintas capas: presentación, dominio, datos, lo que garantiza una estructura robusta, mantenible y testeable.
+
 ---
+
+## 🧱 Clean Architecture
+El proyecto está dividido en las siguientes capas:
+- Presentación: Páginas y componentes de la interfaz de usuario (Ionic/Angular)
+- Dominio: Contiene las entidades del negocio, interfaces de repositorios y casos de uso (UseCases)
+- Datos: Implementación concreta de repositorios y acceso a datos (por ejemplo, localStorage)
+
+Esto permite:
+- Independencia del framework
+- Mayor facilidad para pruebas unitarias
+- Sólida separación de responsabilidades
+- Escalabilidad limpia del proyecto
 
 ## ⚠️ Nota Importante: Capacitor en lugar de Cordova
 
@@ -74,9 +88,11 @@ npm run build:android // Este comando compila web, limpia y sincroniza android y
 ```
 
 ## 🧪 Calidad del Código
-
-El proyecto fue analizado con SonarQube para asegurar un código limpio, mantenible y libre de errores comunes.
-La mayoría del código está documentado adecuadamente para facilitar su comprensión y mantenimiento por parte de otros desarrolladores.
+- Análisis con SonarQube: Código limpio y mantenible
+- Principios SOLID aplicados
+- Test unitarios en los casos de uso (UseCases)
+- Arquitectura limpia y documentación interna
+- Tipado estricto con TypeScript
 
 ## 📦 Exportación
 
@@ -85,21 +101,11 @@ Se generaron archivos .apk para Android, listo para pruebas.
 ## 📁 Estructura del Repositorio
 ```bash
 src/app/
-├── components/           # Componentes reutilizables
-│   ├── edit-category-modal/  # Modal para editar categorías
-│   ├── edit-task-modal/      # Modal para editar tareas
-│   └── menu/                 # Componente de menú
-├── models/              # Interfaces y modelos de datos
-│   ├── task.model.ts    # Modelo de tarea
-│   └── category.model.ts # Modelo de categoría
-├── pages/              # Páginas principales de la aplicación
-│   ├── home/           # Página principal
-│   ├── tasks/          # Lista de tareas
-│   ├── add-task/       # Crear nueva tarea
-│   └── settings/       # Configuraciones
-└── services/           # Servicios de la aplicación
-    ├── data.service.ts        # Servicio de gestión de datos
-    └── remote-config.service.ts # Servicio de configuración remota
+├── presentation/           # Páginas y componentes (UI)
+├── domain/                 # Entidades, repositorios y casos de uso (negocio)
+├── data/                   # Fuentes de datos (localStorage, API, etc.)
+├── core/                   # Servicios comunes y configuración
+└── assets/                 # Imágenes, íconos y otros recursos estáticos
 ```
 
 ## Modelos de Datos
@@ -123,28 +129,6 @@ interface Category {
     name: string;
 }
 ```
-
-## Servicios
-
-### DataService
-Servicio principal para la gestión de datos que maneja:
-- Almacenamiento local de tareas y categorías
-- Operaciones CRUD para tareas y categorías
-- Persistencia de datos usando localStorage
-
-Métodos principales:
-- `addTask(task: Task)`: Agrega una nueva tarea
-- `toggleTask(task: Task)`: Alterna el estado de completado de una tarea
-- `deleteTask(task: Task)`: Elimina una tarea
-- `addCategory(category: Category)`: Agrega una nueva categoría
-- `deleteCategory(category: Category)`: Elimina una categoría
-- `updateTask(updatedTask: Task)`: Actualiza una tarea existente
-- `updateCategory(updatedCategory: Category)`: Actualiza una categoría existente
-
-### RemoteConfigService
-Servicio para manejar configuraciones remotas de la aplicación.
-
----
 
 ## 📸 Demostraciones
 

@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../../models/task.model';
-import { DataService } from '../../services/data.service';
-import { RemoteConfigService } from '../../services/remote-config.service';
+import { TaskEntity } from '../../../domain/entities/task.entity';
+import { RemoteConfigService } from '../../../core/services/remote-config.service';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToggleTaskUseCase } from 'src/app/domain/use-cases/tasks/toggle-task.use-case';
+import { DeleteTaskUseCase } from 'src/app/domain/use-cases/tasks/delete-task.use-case';
+import { GetTasksUseCase } from 'src/app/domain/use-cases/tasks/get-tasks.use-case';
+import { CreateTaskUseCase } from 'src/app/domain/use-cases/tasks/create-task.use-case';
+import { CreateCategoryUseCase } from 'src/app/domain/use-cases/categories/create-category.use-case';
+import { GetCategoriesUseCase } from 'src/app/domain/use-cases/categories/get-categories.use-case';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.page.html',
@@ -20,14 +25,19 @@ export class AddTaskPage implements OnInit {
   selectedDate: string | null = null;
   newCategory = '';
   constructor(
-    public dataService: DataService,
+    public getTasksUseCase: GetTasksUseCase,
+    public createTaskUseCase: CreateTaskUseCase,
+    public toggleTaskUseCase: ToggleTaskUseCase,
+    public deleteTaskUseCase: DeleteTaskUseCase,
+    public createCategoryUseCase: CreateCategoryUseCase,
+    public getCategoriesUseCase: GetCategoriesUseCase,
     public remoteConfigService: RemoteConfigService,
     private toastController: ToastController
   ) {}
 
   addCategory() {
     if (this.newCategory.trim()) {
-      this.dataService.addCategory({
+      this.createCategoryUseCase.execute({
         id: Date.now(),
         name: this.newCategory,
       });
@@ -52,7 +62,6 @@ export class AddTaskPage implements OnInit {
   }
   onDateChange(event: any) {
     this.selectedDate = event.detail.value;
-    console.log('Fecha seleccionada:', this.selectedDate);
   }
   addTask() {
     if (
@@ -61,7 +70,7 @@ export class AddTaskPage implements OnInit {
       this.selectedCategoryId &&
       this.descriptionTask
     ) {
-      this.dataService.addTask({
+      this.createTaskUseCase.execute({
         id: Date.now(),
         title: this.titleTask,
         description: this.descriptionTask,
@@ -77,22 +86,25 @@ export class AddTaskPage implements OnInit {
     }
   }
 
-  toggleTask(task: Task) {
-    this.dataService.toggleTask(task);
+  toggleTask(task: TaskEntity) {
+    this.toggleTaskUseCase.execute(task);
   }
 
-  deleteTask(task: Task) {
-    this.dataService.deleteTask(task);
+  deleteTask(task: TaskEntity) {
+    this.deleteTaskUseCase.execute(task);
   }
 
   filteredTasks() {
-    return this.dataService.tasks;
+    return this.getTasksUseCase.execute();
   }
-
+  getCategories(){
+    return this.getCategoriesUseCase.execute();
+  }
   getCategoryName(categoryId?: number) {
-    const category = this.dataService.categories.find(
-      (c) => c.id === categoryId
-    );
+
+    const category = this.getCategoriesUseCase
+      .execute()
+      .find((c) => c.id === categoryId);
     return category ? category.name : '';
   }
 }

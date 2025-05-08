@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { DataService } from 'src/app/services/data.service';
+import { GetCategoriesUseCase } from 'src/app/domain/use-cases/categories/get-categories.use-case';
 
 @Component({
   selector: 'app-edit-task-modal',
@@ -15,7 +15,7 @@ export class EditTaskModalComponent {
   @Input() task: any = {};
   selectedCategoryId?: number;
   selectedDate: string | null = null;
-  constructor(private modalCtrl: ModalController, public dataService: DataService) {}
+  constructor(private modalCtrl: ModalController, public getCategoriesUseCase: GetCategoriesUseCase) {}
 
   close() {
     this.modalCtrl.dismiss();
@@ -28,9 +28,11 @@ export class EditTaskModalComponent {
   onDateChange(event: any) {
     this.selectedDate = event.detail.value;
   }
-
+  getCategories(){
+    return this.getCategoriesUseCase.execute();
+  }
   getCategoryName(categoryId?: number) {
-    const category = this.dataService.categories.find(
+    const category = this.getCategories().find(
       (c) => c.id === categoryId
     );
     return category ? category.name : '';

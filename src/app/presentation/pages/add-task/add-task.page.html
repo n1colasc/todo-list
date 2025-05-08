@@ -40,7 +40,7 @@
               interface="popover"
             >
               <ion-select-option
-                *ngFor="let category of dataService.categories"
+                *ngFor="let category of getCategories()"
                 [value]="category.id"
               >
                 {{ category.name }}
